@@ -1,24 +1,26 @@
-function [ pub_key, pri_key ] = RSA_keys( p, q )
+function [ e, d, n ] = RSA_keys( p, q )
 
-%if or((miller_rabin_testprimo(p,100)),(miller_rabin_testprimo(q,100)))==0
-%    'p E/OU q NAO EH PRIMO'
-%    return;
-%end;
+if or(or( (miller_vezes(p,100)==0),(miller_vezes(q,100)==0)),p==q )
+%   'p E/OU q NAO EH PRIMO ou p==q'
+    pub_key = -1;
+    pri_key = -1;
+    return;
+end;
 
 n = uint64(p*q);
 
 toc_n = (p-1)*(q-1);
-ja_eh = false;
-for i=1:toc_n
-  if ( (euclides_mdc(toc_n,i)==1) && (ja_eh == false) )
+for i=2:toc_n-1
+  if ( euclides_mdc(toc_n,i)==1 )
     e = i;
-    ja_eh=true;
+    break;
+
   end
 end
 
-% d = mod( (e^(-1)) ,toc_n );
-d = exponenciacaoMod(e,-1,toc_n);%Usar o Euclides para calcular o inv do e
-pub_key = [e, n];
-pri_key = [d, n];
+%d = mod(e^(-1),toc_n);
+
+[d ~] = euclidesEstendido(e,toc_n);
+
 
 end

@@ -2,7 +2,7 @@ function [ resp ] = exponenciacaoMod( a, b, n )
 
 c = 0;
 f = 1;
-k = floor(log2(b));
+k = floor(log2(double(b)));
 for i = k:-1:0
     c = 2*c;
     f = mod(f*f,n);
