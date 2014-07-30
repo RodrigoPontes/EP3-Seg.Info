@@ -1,8 +1,8 @@
 
 min = 1; % Número inicial mínimo do intervalo
 max = 100; % Número inicial máximo do intervalo
-rangeMax = 8; % Quantidade de intervalos
-percTestes = 0.05; % Porcentagem de valores a serem testados dentro do intervalo
+rangeMax = 1000; % Quantidade de intervalos a serem testados
+percTestes = 0.5; % Porcentagem de valores a serem testados dentro do intervalo
 results = zeros(rangeMax,1); % Vetor de resultados de cada intervalo
 
 for i=1:rangeMax
@@ -26,8 +26,11 @@ for i=1:rangeMax
     results(i) = double(sum(testes))/double(qtdTestes);
     
     % Define novo intervalo
-    min = min * 5;
-    max = max * 5;
+    min = min + 10000;
+    max = max + 10000;
 end
 
-results
+x = 1:10000:10000000;
+bar(x,results)
+mean(results)
+std(results)
