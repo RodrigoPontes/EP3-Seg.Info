@@ -1,6 +1,6 @@
 
 min = 1; % Número inicial mínimo do intervalo
-max = 100; % Número inicial máximo do intervalo
+max = 10000; % Número inicial máximo do intervalo
 rangeMax = 1000; % Quantidade de intervalos a serem testados
 percTestes = 0.5; % Porcentagem de valores a serem testados dentro do intervalo
 results = zeros(rangeMax,1); % Vetor de resultados de cada intervalo
